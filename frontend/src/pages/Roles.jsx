@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { useToast } from '../context/ToastContext';
 import RoleList from '../components/RoleList';
 import RoleForm from '../components/RoleForm';
 
 export default function Roles() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const { showToast } = useToast();
   const [showForm, setShowForm] = useState(false);
   const [editingRole, setEditingRole] = useState(null);
   const [refreshKey, setRefreshKey] = useState(0);
@@ -22,9 +24,10 @@ export default function Roles() {
   };
 
   const handleSuccess = () => {
+    showToast('success', editingRole ? 'Role updated successfully!' : 'Role created successfully!');
     setShowForm(false);
     setEditingRole(null);
-    setRefreshKey(prev => prev + 1); // Trigger re-render
+    setRefreshKey(prev => prev + 1);
   };
 
   const handleCancel = () => {
@@ -34,12 +37,13 @@ export default function Roles() {
 
   const handleLogout = async () => {
     await logout();
+    showToast('success', 'Logged out successfully');
     navigate('/login');
   };
 
   return (
     <div className="min-h-screen bg-gray-100">
-      {/* Navigation */}
+      {/* Navigation - keep as is */}
       <nav className="bg-white shadow">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
@@ -54,17 +58,17 @@ export default function Roles() {
                 </button>
                 <button
                   onClick={() => navigate('/decks')}
-                  className="px-4 py-2 text-gray-600 hover:text-blue-600"
+                  className="px-4 py-2 text-gray-600 hover:text-blue-600 transition-colors"
                 >
                   Deck Builder
                 </button>
               </div>
             </div>
             <div className="flex items-center gap-4">
-              <span className="text-gray-700">Welcome, {user?.username}</span>
+              <span className="text-gray-700">Welcome, <span className="font-semibold">{user?.username}</span></span>
               <button
                 onClick={handleLogout}
-                className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+                className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
               >
                 Logout
               </button>
