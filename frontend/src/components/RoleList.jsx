@@ -160,14 +160,16 @@ export default function RoleList({ onEdit, onCreateNew }) {
             >
               {/* Role Image */}
               {role.image_url ? (
-                <img
-                  src={role.image_url}
-                  alt={role.name}
-                  className="w-full h-48 object-cover rounded-t-lg"
-                />
+                <div className="relative w-full" style={{ paddingBottom: '135.7%' }}>
+                  <img
+                    src={role.image_url}
+                    alt={role.name}
+                    className="absolute inset-0 w-full h-full object-cover rounded-t-lg"
+                  />
+                </div>
               ) : (
-                <div className="w-full h-48 bg-gradient-to-br from-gray-100 to-gray-200 rounded-t-lg flex items-center justify-center">
-                  <span className="text-gray-400 text-5xl font-bold">?</span>
+                <div className="relative w-full bg-gradient-to-br from-gray-100 to-gray-200 rounded-t-lg flex items-center justify-center" style={{ paddingBottom: '150%' }}>
+                  <span className="absolute text-gray-400 text-5xl font-bold">?</span>
                 </div>
               )}
 

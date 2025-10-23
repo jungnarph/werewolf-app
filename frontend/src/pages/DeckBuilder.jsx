@@ -223,14 +223,16 @@ export default function DeckBuilder() {
                       onClick={() => addRole(role.id)}
                     >
                       {role.image_url ? (
-                        <img
-                          src={role.image_url}
-                          alt={role.name}
-                          className="w-full h-32 object-cover rounded mb-2"
-                        />
-                      ) : (
-                        <div className="w-full h-32 bg-gray-200 rounded mb-2 flex items-center justify-center">
-                          <span className="text-gray-400 text-2xl">?</span>
+                        <div className="relative w-full" style={{ paddingBottom: '135.7%' }}>
+                            <img
+                            src={role.image_url}
+                            alt={role.name}
+                            className="absolute inset-0 w-full h-full object-cover rounded mb-2"
+                            />
+                        </div>
+                        ) : (
+                        <div className="relative w-full bg-gray-200 rounded mb-2 flex items-center justify-center" style={{ paddingBottom: '150%' }}>
+                            <span className="absolute text-gray-400 text-2xl">?</span>
                         </div>
                       )}
                       <h3 className="font-semibold text-sm">{role.name}</h3>

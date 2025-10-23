@@ -23,6 +23,9 @@ const Role = sequelize.define('Role', {
   image_url: {
     type: DataTypes.STRING(500)
   },
+  image_hash: {
+    type: DataTypes.STRING(64)
+  },
   is_official: {
     type: DataTypes.BOOLEAN,
     defaultValue: false
